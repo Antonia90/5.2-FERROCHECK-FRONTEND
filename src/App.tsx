@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
+
 export default function App() {
-
-
   return (
-    <>
-      <div className="min-h-screen">
+    <Layout>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </div>
-    </>
+    </Layout>
   )
 }
 
