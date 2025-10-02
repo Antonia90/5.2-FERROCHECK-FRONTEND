@@ -1,9 +1,9 @@
 @import "tailwindcss";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/600.css";
+@import "@fontsource/karla/400.css";
+@import "@fontsource/karla/700.css";
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Karla", sans-serif;
 }
 
 @theme {

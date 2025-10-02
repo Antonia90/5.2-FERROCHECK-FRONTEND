@@ -40,7 +40,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-iron-soft">
       <div className="card w-full max-w-md">
         <div className="card-body">
-          <h1 className="text-2xl font-semibold text-iron mb-6">
+          <h1 className="text-2xl font-semibold text-iron mb-6 uppercase text-center">
             Ingresar a FerroCheck
           </h1>
 
