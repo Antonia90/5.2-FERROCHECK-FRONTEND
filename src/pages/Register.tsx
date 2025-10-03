@@ -1,18 +1,25 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { apiLogin } from "../api/auth";
+import { apiRegister } from "../api/auth";
 import { useAuthStore } from "../store/auth";
 import { useState } from "react";
 
-const schema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
-});
+const schema = z
+  .object({
+    name: z.string().min(2, "Mínimo 2 caracteres"),
+    email: z.string().email("Email inválido"),
+    password: z.string().min(6, "Mínimo 6 caracteres"),
+    password_confirmation: z.string().min(6, "Mínimo 6 caracteres"),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    path: ["password_confirmation"],
+    message: "Las contraseñas no coinciden",
+  });
 
 type FormData = z.infer<typeof schema>;
 
-export default function Login() {
+export default function Register() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -27,21 +34,22 @@ export default function Login() {
   const onSubmit = async (data: FormData) => {
     setServerError(null);
     try {
-      const res = await apiLogin(data);
+      const res = await apiRegister(data);
       setAuth(res.user, res.token);
       window.location.href = "/";
     } catch (e: any) {
-      const msg = e?.response?.data?.message || "No se pudo iniciar sesión.";
+      const msg =
+        e?.response?.data?.message || "No se pudo registrar el usuario.";
       setServerError(msg);
     }
   };
 
   return (
-    <div className="flex items-center justify-center my-36">
-      <div className="card w-full max-w-md ">
+    <div className="flex flex-grow items-center justify-center bg-iron-soft my-36">
+      <div className="card w-full max-w-md shadow-lg">
         <div className="card-body">
           <h1 className="text-2xl font-semibold text-iron mb-6 lowercase text-center">
-            Ingresar a FerroCheck
+            Crear cuenta en FerroCheck
           </h1>
 
           {serverError && (
@@ -51,6 +59,20 @@ export default function Login() {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium mb-1">nombre</label>
+              <input
+                type="text"
+                className="w-full rounded-xl border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:ring-iron outline-none"
+                {...register("name")}
+              />
+              {errors.name && (
+                <p className="text-sm text-red-600 mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+
             <div>
               <label className="block text-sm font-medium mb-1">email</label>
               <input
@@ -66,7 +88,9 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">contraseña</label>
+              <label className="block text-sm font-medium mb-1">
+                contraseña
+              </label>
               <input
                 type="password"
                 className="w-full rounded-xl border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:ring-iron outline-none"
@@ -79,11 +103,27 @@ export default function Login() {
               )}
             </div>
 
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                confirmar contraseña
+              </label>
+              <input
+                type="password"
+                className="w-full rounded-xl border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:ring-iron outline-none"
+                {...register("password_confirmation")}
+              />
+              {errors.password_confirmation && (
+                <p className="text-sm text-red-600 mt-1">
+                  {errors.password_confirmation.message}
+                </p>
+              )}
+            </div>
+
             <button
               className="w-full btn bg-iron text-white rounded-xl py-2 hover:opacity-90 lowercase"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Ingresando…" : "Ingresar"}
+              {isSubmitting ? "Creando cuenta…" : "Registrarse"}
             </button>
           </form>
         </div>
