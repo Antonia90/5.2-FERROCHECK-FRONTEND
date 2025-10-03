@@ -1,7 +1,5 @@
-// import { Link } from "react-router-dom";
-// import ferroImg from "../images/ferrocheck-home.png";
-
 import { Link } from "react-router-dom";
+// import ferroImg from "../images/ferrocheck-home.png";
 
 const requirements = [
   { label: "mujer premenopáusica", mg: 18 },
@@ -16,20 +14,20 @@ export default function Home() {
       <div className="grid md:grid-cols-2 gap-10 items-start">
         {/* IZQUIERDA — intro + tabla + aviso */}
         <div className="space-y-6">
-          <section className="space-y-3">
+          <section className="space-y-3 my-28">
             <h1 className="text-3xl font-bold text-iron lowercase">
-              bienvenido/a a ferrocheck
+              aumenta tu consumo de hierro
             </h1>
-            <p className="text-gray-700">
-              el hierro es fundamental para transportar oxígeno y mantener la energía diaria.
-              esta aplicación te ayuda a estimar tu ingesta y a encontrar ideas de recetas.
+            <p className="text-gray-700 text-2xl w-2/3">
+              ferrocheck te ayuda a controlar tu ingesta y a encontrar ideas de
+              recetas ricas en hierro.
             </p>
           </section>
 
-          <section className="card shadow-elevated">
+          <section className="card w-2/3 shadow-elevated mb-2">
             <div className="card-body">
               <h2 className="text-xl font-semibold mb-4 lowercase">
-                requerimientos diarios de hierro (estimado)
+                requerimientos estimados de hierro
               </h2>
               <table className="w-full text-left text-sm">
                 <thead>
@@ -52,31 +50,44 @@ export default function Home() {
 
           {/* aviso orientativo pegado a la tabla, en la parte inferior izquierda */}
           <p className="text-xs text-gray-600 lowercase">
-            ⚠️ la información es orientativa y puede variar. consultá siempre a un/a profesional de la salud.
+            * la información es orientativa y puede variar.
           </p>
         </div>
 
         {/* DERECHA — accesos verticales */}
-        <div className="space-y-6">
-          <Link to="/recipes" className="block card hover:shadow-lg transition">
-            <div className="card-body lowercase">
-              <h3 className="font-semibold text-iron mb-1">recetas</h3>
-              <p className="text-sm text-gray-600">ideas variadas para comer rico y equilibrado.</p>
-            </div>
-          </Link>
-
-          <Link to="/ingredients" className="block card hover:shadow-lg transition">
-            <div className="card-body lowercase">
-              <h3 className="font-semibold text-iron mb-1">ingredientes</h3>
-              <p className="text-sm text-gray-600">conocé el hierro estimado de cada alimento.</p>
-            </div>
-          </Link>
-
-          <Link to="/daily-check" className="block card hover:shadow-lg transition">
-            <div className="card-body lowercase">
-              <h3 className="font-semibold text-iron mb-1">daily check</h3>
+        <div className="flex flex-col items-center gap-24 mt-20">
+          <Link
+            to="/daily-check"
+            className="card hover:shadow-lg transition w-auto max-w-xs"
+          >
+            <div className="card-body lowercase hover:bg-iron-soft rounded-2xl shadow-xl">
+              <h3 className="font-semibold text-iron mb-1">control diario</h3>
               <p className="text-sm text-gray-600">
-                seleccioná recetas y porciones para estimar tu ingesta diaria de hierro.
+                selecciona recetas y porciones para estimar tu ingesta diaria de
+                hierro.
+              </p>
+            </div>
+          </Link>
+          <Link
+            to="/recipes"
+            className="card hover:shadow-lg transition w-auto max-w-xs"
+          >
+            <div className="card-body lowercase hover:bg-iron-soft rounded-2xl shadow-xl">
+              <h3 className="font-semibold text-iron mb-1">recetas</h3>
+              <p className="text-sm text-gray-600">
+                ideas variadas para comer rico y equilibrado.
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            to="/ingredients"
+            className="card hover:shadow-lg transition w-auto max-w-xs"
+          >
+            <div className="card-body lowercase hover:bg-iron-soft rounded-2xl shadow-xl">
+              <h3 className="font-semibold text-iron mb-1">ingredientes</h3>
+              <p className="text-sm text-gray-600">
+                conoce el hierro estimado de cada alimento.
               </p>
             </div>
           </Link>
