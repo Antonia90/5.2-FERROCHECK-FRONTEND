@@ -10,7 +10,7 @@ export default function Navbar() {
   const active = "text-iron font-semibold bg-iron-soft";
 
   return (
-    <nav className="bg-white shadow-xl with-bg navbar-bg">
+    <nav className="bg-white shadow-bottom with-bg navbar-bg">
       <div className="max-w-7xl mx-auto h-16 px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img
