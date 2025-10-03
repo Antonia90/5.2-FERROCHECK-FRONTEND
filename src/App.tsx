@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Ingredients from "./pages/Ingredients";
 import Recipes from "./pages/Recipes";
+import DailyCheck
+ from "./pages/DailyCheck";
 
 export default function App() {
   return (
@@ -15,6 +17,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/ingredients" element={<Ingredients />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/daily-check" element={<DailyCheck />} />
       </Routes>
     </Layout>
   );
