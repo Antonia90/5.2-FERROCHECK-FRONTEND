@@ -209,13 +209,13 @@ export default function Ingredients() {
               <div className="flex gap-2 mt-3">
                 <button
                   onClick={() => handleEdit(ing)}
-                  className="px-3 py-1 text-xs rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  className="px-3 py-1 text-xs rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 cursor-pointer"
                 >
                   editar
                 </button>
                 <button
                   onClick={() => handleDelete(ing.id)}
-                  className="px-3 py-1 text-xs rounded-lg bg-red-100 text-red-700 hover:bg-red-200"
+                  className="px-3 py-1 text-xs rounded-lg bg-red-100 text-red-700 hover:bg-red-200 cursor-pointer"
                 >
                   eliminar
                 </button>
