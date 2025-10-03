@@ -48,22 +48,6 @@ export default function Navbar() {
             consejos
           </NavLink>
           <NavLink
-            to="/iron"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? active : ""}`
-            }
-          >
-            tipos
-          </NavLink>
-          <NavLink
-            to="/symptoms"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? active : ""}`
-            }
-          >
-            síntomas
-          </NavLink>
-          <NavLink
             to="/recipes"
             className={({ isActive }) =>
               `${baseLink} ${isActive ? active : ""}`
@@ -191,24 +175,6 @@ export default function Navbar() {
             }
           >
             consejos
-          </NavLink>
-          <NavLink
-            onClick={() => setOpen(false)}
-            to="/iron"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? active : ""}`
-            }
-          >
-            tipos
-          </NavLink>
-          <NavLink
-            onClick={() => setOpen(false)}
-            to="/symptoms"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? active : ""}`
-            }
-          >
-            síntomas
           </NavLink>
           <NavLink
             onClick={() => setOpen(false)}
