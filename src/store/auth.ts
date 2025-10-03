@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export type User = {
   id: number;
@@ -20,24 +20,29 @@ export const useAuthStore = create<State>((set) => ({
   user: null,
   token: null,
   isAuthenticated: false,
+
   setAuth: (user, token) => {
-    localStorage.setItem('fc_token', token);
-    localStorage.setItem('fc_user', JSON.stringify(user));
+    localStorage.setItem("fc_token", token);
+    localStorage.setItem("fc_user", JSON.stringify(user));
     set({ user, token, isAuthenticated: true });
   },
+
   logout: () => {
-    localStorage.removeItem('fc_token');
-    localStorage.removeItem('fc_user');
+    localStorage.removeItem("fc_token");
+    localStorage.removeItem("fc_user");
     set({ user: null, token: null, isAuthenticated: false });
   },
+
   hydrate: () => {
-    const token = localStorage.getItem('fc_token');
-    const userStr = localStorage.getItem('fc_user');
+    const token = localStorage.getItem("fc_token");
+    const userStr = localStorage.getItem("fc_user");
     if (token && userStr) {
       try {
         const user = JSON.parse(userStr);
         set({ user, token, isAuthenticated: true });
-      } catch {}
+      } catch {
+        set({ user: null, token: null, isAuthenticated: false });
+      }
     }
   },
 }));

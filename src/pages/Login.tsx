@@ -37,7 +37,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center my-36">
       <div className="card w-full max-w-md ">
         <div className="card-body">
           <h1 className="text-2xl font-semibold text-iron mb-6 lowercase text-center">
