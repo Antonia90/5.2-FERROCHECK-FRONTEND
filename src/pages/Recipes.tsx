@@ -156,11 +156,11 @@ export default function Recipes() {
       {/* LISTADO 2/3 */}
       <div className="md:col-span-2 space-y-4">
         {filtered.length === 0 ? (
-          <p className="text-gray-600">no hay recetas.</p>
+          <p className="text-gray-600 m-12 font-bold">no hay recetas de la categoría seleccionada</p>
         ) : (
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4 items-stretch">
             {filtered.map((r) => (
-              <div key={r.id} className="bg-white p-4 rounded-2xl shadow-2xl">
+              <div key={r.id} className="bg-white p-4 rounded-2xl shadow-2xl flex flex-col h-full">
                 <h3 className="text-lg font-bold text-iron mb-1">{r.name}</h3>
                 <p className="text-sm text-gray-600 mb-2">{r.description}</p>
                 <p className="text-sm">Categoría: <span className="font-medium">{r.diet_category}</span></p>
@@ -170,11 +170,11 @@ export default function Recipes() {
                     <li key={ing.id}>{ing.name} – {ing.pivot.quantity_per_serving} {ing.pivot.unit}</li>
                   ))}
                 </ul>
-                <div className="flex gap-2 mt-3 justify-end">
+                <div className="flex gap-2 mt-auto justify-end pt-4">
                   <button onClick={() => handleEdit(r)}
-                    className="px-3 py-1 rounded bg-orange-100 text-orange-700 text-xs">editar</button>
+                    className="px-3 py-1 rounded bg-orange-100 text-orange-700 text-xs cursor-pointer">editar</button>
                   <button onClick={() => handleDelete(r.id)}
-                    className="px-3 py-1 rounded bg-red-100 text-red-700 text-xs">eliminar</button>
+                    className="px-3 py-1 rounded bg-red-100 text-red-700 text-xs cursor-pointer">eliminar</button>
                 </div>
               </div>
             ))}
