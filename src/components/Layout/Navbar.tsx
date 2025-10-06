@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthStore } from "../../store/auth";
 import iconFe from "../../images/icon-fe.png";
@@ -9,7 +9,7 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const { user, isAuthenticated, logout } = useAuthStore();
-
+  const navigate = useNavigate();
   const baseLink =
     "hover:text-iron transition-colors lowercase block px-3 py-2 rounded-xl";
   const active = "text-iron font-semibold bg-iron-soft";
@@ -81,7 +81,7 @@ export default function Navbar() {
                   `${baseLink} ${isActive ? active : ""}`
                 }
               >
-                login
+                iniciar sesión
               </NavLink>
               <NavLink
                 to="/register"
@@ -121,6 +121,7 @@ export default function Navbar() {
                     onClick={() => {
                       logout();
                       setOpenMenu(false);
+                      navigate("/");
                     }}
                     className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl"
                   >
@@ -213,7 +214,7 @@ export default function Navbar() {
                   `${baseLink} ${isActive ? active : ""}`
                 }
               >
-                login
+                iniciar sesión
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
@@ -240,6 +241,7 @@ export default function Navbar() {
                 onClick={() => {
                   logout();
                   setOpen(false);
+                  navigate("/");
                 }}
                 className="text-left px-3 py-2 rounded-xl text-red-600 hover:bg-red-50"
               >
