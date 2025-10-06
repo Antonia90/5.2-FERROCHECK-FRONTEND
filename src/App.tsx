@@ -8,6 +8,7 @@ import Recipes from "./pages/Recipes";
 import DailyCheck
  from "./pages/DailyCheck";
  import Advices from "./pages/Advices";
+ import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/daily-check" element={<DailyCheck />} />
         <Route path="/advices" element={<Advices />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Layout>
   );
