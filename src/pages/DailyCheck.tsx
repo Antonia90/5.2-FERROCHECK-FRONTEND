@@ -6,13 +6,20 @@ import { runDailyCheck, type DailyCheckResponse } from "../api/dailyCheck";
 import { getRecipes, type Recipe } from "../api/recipes";
 
 const schema = z.object({
-  category: z.enum(["woman_premenopausal", "woman_postmenstrual", "man_adult", "pregnant"]),
-  recipes: z.array(
-    z.object({
-      id: z.coerce.number().min(1, "Selecciona una receta"),
-      servings: z.coerce.number().min(1, "Mínimo 1"),
-    })
-  ).min(1, "Agrega al menos una receta"),
+  category: z.enum([
+    "woman_premenopausal",
+    "woman_postmenstrual",
+    "man_adult",
+    "pregnant",
+  ]),
+  recipes: z
+    .array(
+      z.object({
+        id: z.coerce.number().min(1, "Selecciona una receta"),
+        servings: z.coerce.number().min(1, "Mínimo 1"),
+      })
+    )
+    .min(1, "Agrega al menos una receta"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -30,7 +37,10 @@ export default function DailyCheck() {
     resolver: zodResolver(schema) as any,
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: "recipes" });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "recipes",
+  });
 
   useEffect(() => {
     getRecipes().then(setRecipes);
@@ -47,14 +57,19 @@ export default function DailyCheck() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold text-iron mb-6 lowercase">control diario</h1>
+      <h1 className="text-2xl font-semibold text-iron mb-6 lowercase">
+        control diario
+      </h1>
 
       {/* FORM */}
       <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm mb-1">categoría</label>
-            <select {...register("category")} className="w-full rounded-xl border px-3 py-2 shadow-sm">
+            <select
+              {...register("category")}
+              className="w-full rounded-xl border px-3 py-2 shadow-sm"
+            >
               <option value="woman_premenopausal">mujer premenopáusica</option>
               <option value="woman_postmenstrual">mujer postmenstrual</option>
               <option value="man_adult">hombre adulto</option>
@@ -64,23 +79,37 @@ export default function DailyCheck() {
 
           {/* Recetas dinámicas */}
           <div>
-            <h3 className="font-semibold text-orange-700 mb-2">recetas seleccionadas</h3>
+            <h3 className="font-semibold text-orange-700 mb-2">
+              recetas seleccionadas
+            </h3>
             {fields.map((f, i) => (
               <div key={f.id} className="flex gap-2 items-center mb-2">
-                <select {...register(`recipes.${i}.id`)} className="flex-1 rounded-xl border px-2 py-1">
+                <select
+                  {...register(`recipes.${i}.id`)}
+                  className="flex-1 rounded-xl border px-2 py-1"
+                >
                   <option value="">-- receta --</option>
                   {recipes.map((r) => (
-                    <option key={r.id} value={r.id}>{r.name}</option>
+                    <option key={r.id} value={r.id}>
+                      {r.name}
+                    </option>
                   ))}
                 </select>
                 <input
                   type="number"
                   step="1"
+                  min="1"
                   {...register(`recipes.${i}.servings`)}
                   placeholder="porciones"
                   className="w-24 rounded-xl border px-2 py-1"
                 />
-                <button type="button" onClick={() => remove(i)} className="text-red-600 cursor-pointer">✕</button>
+                <button
+                  type="button"
+                  onClick={() => remove(i)}
+                  className="text-red-600 cursor-pointer"
+                >
+                  ✕
+                </button>
               </div>
             ))}
 
@@ -93,7 +122,9 @@ export default function DailyCheck() {
             </button>
 
             {errors.recipes && (
-              <p className="text-sm text-red-600 mt-1">{errors.recipes.message as string}</p>
+              <p className="text-sm text-red-600 mt-1">
+                {errors.recipes.message as string}
+              </p>
             )}
           </div>
 
@@ -113,14 +144,26 @@ export default function DailyCheck() {
           <h2 className="text-xl font-bold text-iron mb-2">resultado</h2>
           <p className="text-sm text-gray-600 mb-4">{result.message}</p>
           <ul className="text-sm space-y-1">
-            <li><strong>Total ingerido:</strong> {result.total_iron_mg} mg</li>
-            <li><strong>Requerido:</strong> {result.required_mg} mg</li>
-            <li><strong>Diferencia:</strong> {result.difference_mg} mg</li>
-            <li><strong>Estado:</strong> {result.status}</li>
+            <li>
+              <strong>Total ingerido:</strong> {result.total_iron_mg} mg
+            </li>
+            <li>
+              <strong>Requerido:</strong> {result.required_mg} mg
+            </li>
+            <li>
+              <strong>Diferencia:</strong> {result.difference_mg} mg
+            </li>
+            <li>
+              <strong>Estado:</strong>{" "}
+              {result.status === "sufficient"
+                ? "suficiente"
+                : result.status === "insufficient"
+                ? "insuficiente"
+                : result.status}
+            </li>
           </ul>
         </div>
       )}
     </div>
   );
 }
-
