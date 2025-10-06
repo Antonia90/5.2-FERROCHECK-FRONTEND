@@ -74,16 +74,17 @@ View your user information and access placeholders for future features such as s
 
 ### 1. Clone repositories
 
-```bash
-# Backend
+## Backend
+
 git clone <https://github.com/Antonia90/5.1-FERROCHECK-API>
 cd ferrocheck_api
 
-# Frontend
+## Frontend Repository
+
 git clone <https://github.com/Antonia90/5.2-FERROCHECK-FRONTEND>
 cd ferrocheck_frontend
 
-2. Backend (Laravel API)
+### 2. Backend (Laravel API)
 
 cd ferrocheck_api
 composer install
@@ -92,9 +93,9 @@ php artisan key:generate
 php artisan migrate --seed
 php artisan passport:install
 php artisan serve
-API will be available at http://127.0.0.1:8000.
+API will be available at <http://127.0.0.1:8000>
 
-3. Frontend (React + Vite)
+### 3. Frontend (React + Vite)
 
 cd ferrocheck_frontend
 npm install
@@ -102,11 +103,11 @@ cp .env.example .env.local
 In .env.local set your API base URL:
 
 ini
-VITE_API_BASE_URL=http://127.0.0.1:8000
+VITE_API_BASE_URL=<http://127.0.0.1:8000>
 Run development server:
 
 npm run dev
-Frontend will be available at http://localhost:5173.
+Frontend will be available at <http://localhost:5173>
 
 🔑 Authentication
 Main endpoints:
@@ -118,13 +119,13 @@ GET /api/user → fetch authenticated user
 
 All private requests require headers:
 
-Authorization: Bearer <TOKEN>
+Authorization: Bearer ``<TOKEN>``
 Accept: application/json
 Seeder credentials:
 
-Admin: admin@example.com / password
+Admin: <admin@example.com> / password
 
-User: user@example.com / password
+User: <user@example.com> / password
 
 📚 Features
 Frontend
