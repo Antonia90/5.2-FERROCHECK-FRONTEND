@@ -120,7 +120,7 @@ export default function Recipes() {
             <option value="omnivora">omnívora</option>
           </select>
 
-          <input type="number" {...register("base_servings")} placeholder="porciones base"
+          <input type="number" min="1" {...register("base_servings")} placeholder="porciones base"
             className="w-full rounded-xl border px-3 py-2" />
 
           {/* INGREDIENTES DINÁMICOS */}
