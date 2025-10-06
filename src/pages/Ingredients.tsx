@@ -12,14 +12,10 @@ import type { Ingredient } from "../api/ingredients";
 
 const schema = z.object({
   name: z.string().min(2, "El nombre es obligatorio"),
-  ingredient_type: z.enum([
-    "verdura",
-    "fruta",
-    "proteina",
-    "lacteo",
-    "condimento",
-    "otro",
-  ]),
+  ingredient_type: z.enum(
+    ["verdura", "fruta", "proteina", "lacteo", "condimento", "otro"] as const,
+    { message: "Debes seleccionar un tipo" }
+  ),
   iron_mg_per_100g: z.coerce.number().min(0, "Debe ser mayor o igual a 0"),
 });
 
@@ -101,10 +97,7 @@ export default function Ingredients() {
         <h2 className="text-lg font-medium text-iron mb-4 lowercase">
           {editing ? "editar ingrediente" : "agregar ingrediente"}
         </h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm mb-1">nombre</label>
             <input
@@ -143,6 +136,7 @@ export default function Ingredients() {
             <input
               type="number"
               step="0.1"
+              min="0"
               className="w-full rounded-xl border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:ring-iron outline-none"
               {...register("iron_mg_per_100g")}
             />
@@ -159,11 +153,7 @@ export default function Ingredients() {
               className="btn bg-iron text-white rounded-xl px-4 py-2 hover:opacity-90 lowercase"
               disabled={isSubmitting}
             >
-              {isSubmitting
-                ? "guardando…"
-                : editing
-                ? "actualizar"
-                : "guardar"}
+              {isSubmitting ? "guardando…" : editing ? "actualizar" : "guardar"}
             </button>
 
             {editing && (
@@ -187,7 +177,9 @@ export default function Ingredients() {
       ) : error ? (
         <p className="p-4 text-center text-red-600">{error}</p>
       ) : ingredients.length === 0 ? (
-        <p className="text-center text-gray-600">no hay ingredientes cargados.</p>
+        <p className="text-center text-gray-600">
+          no hay ingredientes cargados.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {ingredients.map((ing) => (
